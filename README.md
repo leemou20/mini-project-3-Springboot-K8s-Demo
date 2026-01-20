@@ -209,7 +209,7 @@ curl http://$(minikube ip):30080/message
 
 You should see your Spring Boot message:
 ```bash
-Congratulation you successfully deployed your application to kubernetes !!
+Congratulation we have successfully deployed your application to kubernetes !!
 ```
 
 ---
