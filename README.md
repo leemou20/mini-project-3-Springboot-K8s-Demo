@@ -50,19 +50,11 @@ sudo apt install maven -y
 mvn -version
 ```
 3. Install Git
-Git Installation and Clone Project
-
 ```bash
 sudo apt update
 sudo apt install git -y
 git --version
 ```
-Clone the project repository from GitHub:
-```bash
-git clone https://github.com/leemou20/mini-project-3-Springboot-K8s-Demo.git
-cd mini-project-3-Springboot-K8s-Demo
-```
-
 4. Install Docker:
 ```bash
 sudo apt install docker.io -y
@@ -80,13 +72,11 @@ sudo snap install kubectl --classic
 kubectl version --client
 ```
 
----
-
-### 2. Start Minikube and Configure Docker
+### 2. Clone the project repository from GitHub:
 ```bash
-minikube start --driver=docker
-eval $(minikube docker-env)
-```
+cd ~
+git clone https://github.com/leemou20/mini-project-3-Springboot-K8s-Demo.git
+cd mini-project-3-Springboot-K8s-Demo
 
 ---
 
@@ -98,7 +88,15 @@ mvn clean package -DskipTests
 
 ---
 
-### 4. Build Docker Image
+### 4. Start Minikube and Configure Docker
+```bash
+minikube start --driver=docker
+eval $(minikube docker-env)
+```
+
+---
+
+### 5. Build Docker Image
 ```bash
 docker build -t springboot-k8s-demo:1.0 .
 ```
@@ -113,7 +111,7 @@ ENTRYPOINT ["java","-jar","app.jar"]
 
 ---
 
-### 5. Deploy to Kubernetes
+### 6. Deploy to Kubernetes
 ```bash
 kubectl apply -f deployment.yaml
 kubectl apply -f service.yaml
@@ -128,7 +126,7 @@ imagePullPolicy: IfNotPresent
 
 ---
 
-### 6. Verify Deployment
+### 7. Verify Deployment
 ```bash
 kubectl logs <pod-name>
 curl http://$(minikube ip):30080/message
@@ -140,14 +138,14 @@ Congratulation we have successfully deployed your application to kubernetes !!
 
 ---
 
-### 7. Access via Browser
+### 8. Access via Browser
 ```bash
 minikube service springboot-k8s-service
 ```
 > This opens your default browser with the NodePort service.
 
 ---
-### 8. clean up kubernetes and minikube resources
+### 9. clean up kubernetes and minikube resources
 
 After finishing your work, it’s good practice to delete all deployments, services, and optionally stop Minikube to free resources:
 
