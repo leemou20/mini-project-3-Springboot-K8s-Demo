@@ -76,10 +76,11 @@ kubectl version --client
 cd ~
 git clone https://github.com/leemou20/mini-project-3-Springboot-K8s-Demo.git
 cd mini-project-3-Springboot-K8s-Demo
-
+```
 ---
 
-### 3. Build Spring Boot Application
+### 3. Build Spring Boot Application:
+
 ```bash
 mvn clean package -DskipTests
 ```
