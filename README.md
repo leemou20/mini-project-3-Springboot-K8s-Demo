@@ -28,6 +28,7 @@ This project demonstrates deploying a Spring Boot application on Kubernetes usin
 ## Prerequisites
 - Java 21 installed
 - Maven installed
+- git installed
 - Docker installed
 - Minikube installed
 - Kubectl installed
@@ -48,6 +49,20 @@ java -version
 sudo apt install maven -y
 mvn -version
 ```
+# Install Git
+Git Installation and Clone Project
+
+```bash
+sudo apt update
+sudo apt install git -y
+git --version
+```
+Clone the project repository from GitHub:
+```bash
+git clone https://github.com/leemou20/mini-project-3-Springboot-K8s-Demo.git
+cd mini-project-3-Springboot-K8s-Demo
+```
+
 3. Install Docker:
 ```bash
 sudo apt install docker.io -y
