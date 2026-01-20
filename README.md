@@ -135,17 +135,85 @@ curl http://$(minikube ip):30080/message
 ```
 Congratulation we have successfully deployed your application to kubernetes !!
 ```
-
 ---
 
-### 8. Access via Browser
+Now we error why you still see ImagePullBackOff ✅
+
+You’re using:
 ```bash
-minikube service springboot-k8s-service
+image: springboot-k8s-yaml:1.0
 ```
-> This opens your default browser with the NodePort service.
+
+but Kubernetes cannot pull this image from Docker Hub because it doesn’t exist there.
+
+Since you are using Minikube, you have two options to fix this:
+
+1️⃣ Option 1: Build the image inside Minikube Docker
+
+This is the easiest and most reliable method.
+
+Step 1: Tell your shell to use Minikube Docker
+```bash
+eval $(minikube docker-env)
+```
+
+Now all docker build commands use Minikube’s Docker, so pods can see the images.
+
+Step 2: Build the Docker image
+```bash
+docker build -t springboot-k8s-yaml:1.0 .
+```
+
+Step 3: Restart deployment
+```bash
+kubectl rollout restart deployment springboot-k8s-deployment
+```
+
+Step 4: Check pods
+```bash
+kubectl get pods
+```
+
+✅ Pods should now go to Running instead of ImagePullBackOff.
+
+2️⃣ Option 2: Load an existing Docker image into Minikube
+
+If you already built the image on your host machine, you can push it into Minikube:
+
+```bash
+minikube image load springboot-k8s-yaml:1.0
+```
+
+
+Then restart the deployment:
+```bash
+
+kubectl rollout restart deployment springboot-k8s-deployment
+kubectl get pods
+```
+
+✅ Key Notes
+
+imagePullPolicy: IfNotPresent is correct — Kubernetes will use the local image if it exists.
+
+You cannot use host Docker images directly unless you build inside Minikube or load it.
+
+ImagePullBackOff basically says: “I can’t find the image!”
+
+🔹 Quick check after fix
+```bash
+kubectl get pods
+kubectl logs <pod-name>
+curl http://$(minikube ip):30080/message
+```
+
+You should see your Spring Boot message:
+```bash
+Congratulation you successfully deployed your application to kubernetes !!
+```
 
 ---
-### 9. clean up kubernetes and minikube resources
+### 8. clean up kubernetes and minikube resources
 
 After finishing your work, it’s good practice to delete all deployments, services, and optionally stop Minikube to free resources:
 
