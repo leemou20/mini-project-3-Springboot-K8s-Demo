@@ -49,7 +49,7 @@ java -version
 sudo apt install maven -y
 mvn -version
 ```
-# Install Git
+3. Install Git
 Git Installation and Clone Project
 
 ```bash
@@ -63,18 +63,18 @@ git clone https://github.com/leemou20/mini-project-3-Springboot-K8s-Demo.git
 cd mini-project-3-Springboot-K8s-Demo
 ```
 
-3. Install Docker:
+4. Install Docker:
 ```bash
 sudo apt install docker.io -y
 docker --version
 ```
-4. Install Minikube:
+5. Install Minikube:
 ```bash
 curl -LO https://storage.googleapis.com/minikube/releases/latest/minikube_latest_amd64.deb
 sudo dpkg -i minikube_latest_amd64.deb
 minikube version
 ```
-5. Install Kubectl:
+6. Install Kubectl:
 ```bash
 sudo snap install kubectl --classic
 kubectl version --client
